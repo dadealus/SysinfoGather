@@ -1,4 +1,5 @@
-﻿#    Author         : Ryan Gilbert @xelnaga15
+﻿# PowerShell Script
+#    Author         : Ryan Gilbert @xelnaga15
 #    GitHub         : https://github.com/dadealus
 #    Version        : 1.02
 Write-Host "Dade's SystemInfoGather"
