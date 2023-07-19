@@ -1,9 +1,8 @@
 ﻿#    Author         : Ryan Gilbert @xelnaga15
 #    GitHub         : https://github.com/dadealus
 #    Version        : 1.02
-#
 Write-Host "Dade's SystemInfoGather"
-function Get-SystemInfo {
+Function Get-SystemInfo {
     # Get Processor information
     $processor = Get-WmiObject Win32_Processor | Select-Object Name
 
@@ -19,7 +18,7 @@ function Get-SystemInfo {
     Write-Host "Installed RAM: $([math]::Round($ram.TotalPhysicalMemory / 1GB, 2)) GB"
 }
 
-function Get-PartitionInfo {
+Function Get-PartitionInfo {
     param (
         [string]$DriveLetter
     )
@@ -38,7 +37,7 @@ function Get-PartitionInfo {
     }
 }
 
-function Get-DriveInfo {
+Function Get-DriveInfo {
     # Get drive information
     $drives = Get-WmiObject Win32_DiskDrive | Where-Object { $_.MediaType -ne "USB" } | Sort-Object MediaType, InterfaceType | Select-Object DeviceID, Model, Size, InterfaceType
 
@@ -58,7 +57,7 @@ function Get-DriveInfo {
 }
 
 
-function Get-MotherboardInfo {
+Function Get-MotherboardInfo {
     # Get motherboard information
     $motherboard = Get-WmiObject Win32_BaseBoard | Select-Object Product
 
