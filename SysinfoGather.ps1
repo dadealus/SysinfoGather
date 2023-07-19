@@ -62,7 +62,7 @@ function Get-MotherboardInfo {
 }
 
 
-
+sleep 2
 # Display system information
 Write-Host "----- System Information -----"
 Get-SystemInfo
