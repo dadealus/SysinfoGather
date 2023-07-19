@@ -1,4 +1,12 @@
-﻿function Get-SystemInfo {
+﻿
+<#
+.NOTES
+    Author         : Ryan Gilbert @xelnaga15
+    GitHub         : https://github.com/dadealus
+    Version        : 1.02
+#>
+
+function Get-SystemInfo {
     # Get Processor information
     $processor = Get-WmiObject Win32_Processor | Select-Object Name
 
