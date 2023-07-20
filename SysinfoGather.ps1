@@ -1,10 +1,4 @@
-﻿Write-Host "Dade's SystemInfoGather"
-# PowerShell Script
-#    Author         : Ryan Gilbert @xelnaga15
-#    GitHub         : https://github.com/dadealus
-#    Version        : 1.02
-
-Function Get-SystemInfo {
+﻿function Get-SystemInfo {
     # Get Processor information
     $processor = Get-WmiObject Win32_Processor | Select-Object Name
 
@@ -20,18 +14,18 @@ Function Get-SystemInfo {
     Write-Host "Installed RAM: $([math]::Round($ram.TotalPhysicalMemory / 1GB, 2)) GB"
 }
 
-Function Get-PartitionInfo {
+function Get-PartitionInfo {
     param (
         [string]$DriveLetter
     )
 
     # Get partition information for the specified drive
-    $partitions = Get-WmiObject Win32_DiskPartition | Where-Object { $_.DeviceID -like "$DriveLetter*" } | Sort-Object DeviceID
+    $partitions = Get-WmiObject Win32_LogicalDisk
 
     foreach ($partition in $partitions) {
         $partitionLetter = $partition.DeviceID
         $partitionSizeGB = [math]::Round($partition.Size / 1GB, 2)
-        $partitionFreeSpaceGB = [math]::Round(($partition.Size - $partition.TotalVirtualMemorySize) / 1GB, 2)
+        $partitionFreeSpaceGB = [math]::Round($partition.FreeSpace / 1GB, 2)
 
         Write-Host "  Partition Letter: $partitionLetter"
         Write-Host "  Partition Size: $partitionSizeGB GB"
@@ -39,7 +33,10 @@ Function Get-PartitionInfo {
     }
 }
 
-Function Get-DriveInfo {
+
+
+
+function Get-DriveInfo {
     # Get drive information
     $drives = Get-WmiObject Win32_DiskDrive | Where-Object { $_.MediaType -ne "USB" } | Sort-Object MediaType, InterfaceType | Select-Object DeviceID, Model, Size, InterfaceType
 
@@ -59,7 +56,7 @@ Function Get-DriveInfo {
 }
 
 
-Function Get-MotherboardInfo {
+function Get-MotherboardInfo {
     # Get motherboard information
     $motherboard = Get-WmiObject Win32_BaseBoard | Select-Object Product
 
@@ -68,7 +65,7 @@ Function Get-MotherboardInfo {
 }
 
 
-sleep 2
+
 # Display system information
 Write-Host "----- System Information -----"
 Get-SystemInfo
