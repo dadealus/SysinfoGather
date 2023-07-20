@@ -1,4 +1,11 @@
-﻿function Get-SystemInfo {
+﻿#
+# PowerShell Script
+#    Author         : Ryan Gilbert @xelnaga15
+#    GitHub         : https://github.com/dadealus
+#    Version        : 1.02
+
+Write-Host "Dade's SystemInfoGather"
+function Get-SystemInfo {
     # Get Processor information
     $processor = Get-WmiObject Win32_Processor | Select-Object Name
 
